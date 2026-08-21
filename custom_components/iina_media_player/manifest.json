@@ -1,7 +1,7 @@
 {
   "domain": "iina_media_player",
   "name": "IINA Media Player",
-  "codeowners": ["@AlexRoh"],
+  "codeowners": ["@smintlife"],
   "config_flow": true,
   "documentation": "https://github.com/AlexRoh/ha-iina-media-player",
   "integration_type": "device",

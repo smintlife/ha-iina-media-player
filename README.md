@@ -41,7 +41,7 @@ A full-featured Home Assistant Custom Integration (`media_player` entity with `d
 
 ## ⚙️ Configuration
 
-1. Ensure the **IINA Plugin (Home Assistant Bridge)** is installed and enabled in IINA on your Mac.
+1. Ensure the [**IINA Plugin (Home Assistant Bridge)**](https://github.com/smintlife/iina-plugin-homeassistant) is installed and enabled in IINA on your Mac.
 2. In Home Assistant, navigate to **Settings -> Devices & Services -> Add Integration**.
 3. Search for **IINA Media Player** (or click configure on the discovered Zeroconf notification).
 4. Enter the host/IP address of the Mac mini and port (default: `8989`).
