@@ -17,7 +17,6 @@ from homeassistant.components.media_player import (
 from homeassistant.components.media_player.const import (
     ATTR_MEDIA_ANNOUNCE,
     ATTR_MEDIA_ENQUEUE,
-    MediaPlayerEnqueue,
 )
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
@@ -252,19 +251,13 @@ class IINAMediaPlayerEntity(MediaPlayerEntity):
     ) -> None:
         """Play media from URL, YouTube, HA Media Browser, or TTS."""
         announce = kwargs.get(ATTR_MEDIA_ANNOUNCE, False)
-        enqueue = kwargs.get(ATTR_MEDIA_ENQUEUE, MediaPlayerEnqueue.PLAY)
+        enqueue = kwargs.get(ATTR_MEDIA_ENQUEUE, "play")
 
         # Process Home Assistant media URLs (Radio, TTS, Local HA Media)
         media_url = async_process_play_media_url(self.hass, media_id)
 
-        # Map enqueue mode
-        enqueue_str = "play"
-        if enqueue == MediaPlayerEnqueue.ADD:
-            enqueue_str = "add"
-        elif enqueue == MediaPlayerEnqueue.NEXT:
-            enqueue_str = "next"
-        elif enqueue == MediaPlayerEnqueue.REPLACE:
-            enqueue_str = "replace"
+        # Map enqueue mode (value is now a plain string)
+        enqueue_str = enqueue if isinstance(enqueue, str) else "play"
 
         _LOGGER.debug(
             "Playing media on IINA: url=%s, enqueue=%s, announce=%s",

@@ -184,6 +184,7 @@ class IINAWebSocketClient:
 
         # Handle state updates (push events or result payloads)
         event_type = data.get("event")
+        _LOGGER.info("WS RECV <- %s", msg.data if isinstance(msg.data, str) else "<binary>")
         if event_type == "state_update" and "data" in data:
             self._update_state_from_dict(data["data"])
             self._notify_callbacks()
@@ -230,6 +231,9 @@ class IINAWebSocketClient:
 
         try:
             await self._ws.send_str(json.dumps(message))
+            _LOGGER.info(
+                "WS SEND -> action=%s id=%d params=%s", action, req_id, params
+            )
             # Wait up to 5 seconds for response
             return await asyncio.wait_for(future, timeout=5.0)
         except asyncio.TimeoutError:
