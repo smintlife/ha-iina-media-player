@@ -1,0 +1,36 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "IINA Media Player",
+        "description": "Geben Sie die Verbindungsdaten für den IINA Media Player auf Ihrem Mac ein.",
+        "data": {
+          "host": "Host / IP-Adresse",
+          "port": "WebSocket-Port",
+          "name": "Gerätename"
+        }
+      },
+      "zeroconf_confirm": {
+        "title": "IINA Media Player erkannt",
+        "description": "Möchten Sie {name} ({host}:{port}) zu Home Assistant hinzufügen?"
+      }
+    },
+    "error": {
+      "cannot_connect": "Verbindung zum IINA WebSocket fehlgeschlagen. Stellen Sie sicher, dass IINA läuft und das Home Assistant Plugin aktiviert ist."
+    },
+    "abort": {
+      "already_configured": "Dieser IINA Media Player ist bereits konfiguriert."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "IINA Optionen",
+        "description": "Erweiterte Verbindungseinstellungen konfigurieren.",
+        "data": {
+          "reconnect_interval": "Hintergrund-Wiederverbindungsintervall (Sekunden)"
+        }
+      }
+    }
+  }
+}
