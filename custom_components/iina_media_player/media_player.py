@@ -119,9 +119,8 @@ class IINAMediaPlayerEntity(MediaPlayerEntity):
         return DeviceInfo(
             identifiers={(DOMAIN, self._attr_unique_id)},
             name=self.entry.title or self.client.hostname or "IINA Media Player",
-            manufacturer="IINA",
-            model="IINA Player macOS",
-            sw_version="1.0.0",
+            manufacturer="smintlife",
+            model="IINA Media Player for macOS",
         )
 
     @property

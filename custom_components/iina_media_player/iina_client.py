@@ -156,11 +156,19 @@ class IINAWebSocketClient:
         try:
             async for msg in self._ws:
                 if msg.type == aiohttp.WSMsgType.TEXT:
+                    raw = msg.data
+                elif msg.type == aiohttp.WSMsgType.BINARY:
+                    # IINA's ws.sendText encodes payloads as binary data.
+                    raw = msg.data.decode("utf-8") if isinstance(msg.data, (bytes, bytearray)) else msg.data
+                else:
+                    raw = None
+
+                if raw is not None:
                     try:
-                        data = json.loads(msg.data)
+                        data = json.loads(raw)
                         self._handle_message(data)
                     except json.JSONDecodeError as err:
-                        _LOGGER.warning("Received invalid JSON from IINA: %s (%s)", msg.data, err)
+                        _LOGGER.warning("Received invalid JSON from IINA: %s (%s)", raw, err)
                 elif msg.type in (aiohttp.WSMsgType.CLOSED, aiohttp.WSMsgType.ERROR, aiohttp.WSMsgType.CLOSING):
                     _LOGGER.info("WebSocket connection closed or received error")
                     break
@@ -184,7 +192,8 @@ class IINAWebSocketClient:
 
         # Handle state updates (push events or result payloads)
         event_type = data.get("event")
-        _LOGGER.info("WS RECV <- %s", msg.data if isinstance(msg.data, str) else "<binary>")
+        # Log the received JSON payload for debugging
+        _LOGGER.info("WS RECV <- %s", json.dumps(data))
         if event_type == "state_update" and "data" in data:
             self._update_state_from_dict(data["data"])
             self._notify_callbacks()
