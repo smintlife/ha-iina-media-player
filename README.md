@@ -1,7 +1,7 @@
-# IINA Media Player Integration for Home Assistant
+# <img src="custom_components/iina_media_player/brand/icon.png" alt="drawing" width="26"/>  IINA Media Player Integration for Home Assistant
 
 [![HACS Custom](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/hacs/integration)
-[![GitHub Release](https://img.shields.io/github/v/release/AlexRoh/ha-iina-media-player)](https://github.com/AlexRoh/ha-iina-media-player/releases)
+[![GitHub Release](https://img.shields.io/github/v/release/smintlife/ha-iina-media-player)](https://github.com/smintlife/ha-iina-media-player/releases)
 
 A full-featured Home Assistant Custom Integration (`media_player` entity with `device_class: receiver`) to remotely control the **IINA** media player on macOS (Mac mini / MacBook / iMac) in real time via WebSocket.
 
